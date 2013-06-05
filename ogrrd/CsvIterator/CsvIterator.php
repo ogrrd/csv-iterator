@@ -5,8 +5,9 @@ namespace ogrrd\CsvIterator;
 class CsvIterator extends \SplFileObject
 {
 
-    protected $names;
-    protected $firstRowUsedAsNames;
+    private $names;
+    private $firstRowUsedAsNames;
+
 
     /**
      * @param string $pathToFile
