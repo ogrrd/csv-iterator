@@ -1,6 +1,6 @@
 <?php
 
-namespace CsvIterator;
+namespace ogrrd\CsvIterator;
 
 class CsvFile implements IteratorAggregate
 {
@@ -206,7 +206,7 @@ class CsvFile implements IteratorAggregate
     public function getIterator()
     {
         if (!$this->exists()) {
-            throw new RuntimeException("The file $this->pathToFile does not exist");
+            throw new \RuntimeException("The file $this->pathToFile does not exist");
         }
         $class = new $this->iteratorClass($this->getPath(), $this->getFieldDelimiter(), $this->getFieldEnclosure());
         if ($this->columnNames) {

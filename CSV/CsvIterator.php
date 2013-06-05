@@ -1,6 +1,6 @@
 <?php
 
-namespace CsvIterator;
+namespace ogrrd\CsvIterator;
 
 class CsvIterator extends \SplFileObject
 {
@@ -24,7 +24,7 @@ class CsvIterator extends \SplFileObject
     /**
      * @param array $names
      * @param type $firstRowUsedAsNames
-     * @return \CsvIterator\CsvIterator
+     * @return \ogrrd\CsvIterator\CsvIterator
      */
     public function setColumnNames(array $names, $firstRowUsedAsNames = false)
     {
