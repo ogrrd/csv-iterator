@@ -149,40 +149,6 @@ class CsvFile implements \IteratorAggregate
     }
 
     /**
-     * Get CSV file path
-     *
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->pathToFile;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFieldDelimiter()
-    {
-        return $this->fieldDelimiter;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFieldEnclosure()
-    {
-        return $this->fieldEnclosure;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLineTerminator()
-    {
-        return $this->lineTerminator;
-    }
-
-    /**
      * @return CsvIterator
      */
     public function getIterator()
@@ -190,7 +156,7 @@ class CsvFile implements \IteratorAggregate
         if (!$this->exists()) {
             throw new \RuntimeException("The file $this->pathToFile does not exist");
         }
-        $iterator = new CsvIterator($this->getPath(), $this->getFieldDelimiter(), $this->getFieldEnclosure());
+        $iterator = new CsvIterator($this->pathToFile, $this->fieldDelimiter, $this->fieldEnclosure);
         if ($this->columnNames) {
             $iterator->setColumnNames($this->columnNames);
         } elseif ($this->useFirstRowAsHeader) {
