@@ -2,7 +2,7 @@
 
 namespace ogrrd\CsvIterator;
 
-class CsvFile implements IteratorAggregate
+class CsvFile implements \IteratorAggregate
 {
 
     /**
