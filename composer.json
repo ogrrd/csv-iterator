@@ -1,0 +1,24 @@
+{
+    "name"             : "ogrrd/csv-iterator",
+    "type"             : "library",
+    "description"      : "CSV Reader to array/object iterator with low memory usage and ease of use.",
+    "keywords"         : ["CSV", "CSVReader", "Iterator"],
+    "license"          : "MIT",
+    "authors"          : [
+        {
+            "name" : "Owen Gerrard",
+            "email": "ogerrard@gmail.com"
+        }
+    ],
+    "require"          : {
+        "php": ">=5.3",
+
+        "ext-SPL"      : "*",
+    },
+    "autoload"         : {
+        "psr-0": {
+            "CsvIterator": "."
+        }
+    },
+    "minimum-stability": "dev"
+}
