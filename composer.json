@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-0": {
-            "CsvIterator": "."
+            "ogrrd\\CsvIterator\\": "."
         }
     },
     "minimum-stability": "dev"
