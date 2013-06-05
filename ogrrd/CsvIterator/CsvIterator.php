@@ -17,7 +17,7 @@ class CsvIterator extends \SplFileObject
     public function __construct($pathToFile, $delimiter = ',', $fieldEnclosure = '"', $escapeChar = '\\')
     {
         parent::__construct($pathToFile, 'r');
-        $this->setFlags(SplFileObject::READ_CSV);
+        $this->setFlags(\SplFileObject::READ_CSV);
         $this->setCsvControl($delimiter, $fieldEnclosure, $escapeChar);
     }
 
