@@ -2,7 +2,7 @@ csv-iterator
 ============
 
 CSV Reader to array/object iterator with low memory usage and ease of use.
-Mostly useful for importing large CSV files from external API's.
+Mostly useful for importing large CSV files from external APIs.
 
 Installation
 ------------
