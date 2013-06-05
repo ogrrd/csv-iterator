@@ -35,11 +35,6 @@ class CsvFile implements \IteratorAggregate
     private $lineTerminator = '\n';
 
     /**
-     * @var string
-     */
-    private $iteratorClass = 'CsvIterator';
-
-    /**
      * @var boolean
      */
     private $useFirstRowAsHeader = false;
@@ -104,19 +99,6 @@ class CsvFile implements \IteratorAggregate
     public function useFirstRowAsHeader()
     {
         $this->useFirstRowAsHeader = true;
-        return $this;
-    }
-
-    /**
-     * Set a custom itertor class to use when looping over the data.
-     * This should be a subclass of CSV_FileIterator
-     *
-     * @param string $className
-     * @return CsvFile
-     */
-    public function setIteratorClass($className)
-    {
-        $this->iteratorClass = $className;
         return $this;
     }
 
@@ -208,14 +190,14 @@ class CsvFile implements \IteratorAggregate
         if (!$this->exists()) {
             throw new \RuntimeException("The file $this->pathToFile does not exist");
         }
-        $class = new $this->iteratorClass($this->getPath(), $this->getFieldDelimiter(), $this->getFieldEnclosure());
+        $iterator = new CsvIterator($this->getPath(), $this->getFieldDelimiter(), $this->getFieldEnclosure());
         if ($this->columnNames) {
-            $class->setColumnNames($this->columnNames);
+            $iterator->setColumnNames($this->columnNames);
         } elseif ($this->useFirstRowAsHeader) {
-            $class->setColumnNames($class->current(), true);
+            $iterator->setColumnNames($iterator->current(), true);
         }
 
-        return $class;
+        return $iterator;
     }
 
 }
