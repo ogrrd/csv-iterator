@@ -45,7 +45,6 @@ class CsvIterator extends \SplFileObject
             // skip first row if names are set by first row of file
             if ($this->firstRowUsedAsNames && $this->key() < 1) {
                 $this->next();
-                $this->current();
             }
             if (count($row) != count($this->names)) {
                 return null;
