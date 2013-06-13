@@ -32,7 +32,16 @@ class CsvIterator extends \SplFileObject
             $this->firstRowUsedAsNames = true;
         }
         $this->names = $names;
+
         return $this;
+    }
+
+    /**
+     * Use the values from the first row as the keys for the remaining rows
+     */
+    public function useFirstRowAsHeader()
+    {
+        $this->setColumnNames($this->current(), true);
     }
 
     /**
@@ -51,6 +60,7 @@ class CsvIterator extends \SplFileObject
             }
             $row = array_combine($this->names, $row);
         }
+
         return $row;
     }
 
@@ -63,6 +73,7 @@ class CsvIterator extends \SplFileObject
         if ($this->names) {
             return count($current) == count($this->names);
         }
+
         return parent::valid();
     }
 
