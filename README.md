@@ -42,8 +42,8 @@ foreach ($rows as $row) {
 Features
 --------
 
-* Set names of columns for more readable code
-* Use first line of csv file as column names
+* Set array of values to be used as keys for the rows (must cover all columns)
+* Use the values from the first row as the keys for the remaining rows
 
 Todo
 ----
