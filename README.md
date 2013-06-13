@@ -28,15 +28,15 @@ Usage
 
 Reading data out of a CSV file:
 ```php
-    use ogrrd\CsvIterator\CsvIterator;
+use ogrrd\CsvIterator\CsvIterator;
 
-    $pathToFile = '/path/to/file.csv';
-    $delimiter = ',';
-    $rows = new CsvIterator($pathToFile, $delimiter);
-    $rows->useFirstRowAsHeader();
-    foreach ($rows as $row) {
-        // print_r($row);
-    }
+$pathToFile = '/path/to/file.csv';
+$delimiter = ','; // optional
+$rows = new CsvIterator($pathToFile, $delimiter);
+$rows->useFirstRowAsHeader();
+foreach ($rows as $row) {
+    // print_r($row);
+}
 ```
 
 Features
