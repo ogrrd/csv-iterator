@@ -28,11 +28,14 @@ Usage
 
 Reading data out of a CSV file:
 ```php
+    use ogrrd\CsvIterator\CsvIterator;
+
     $pathToFile = '/path/to/file.csv';
-    $file = new CsvFile($pathToFile);
-    $file->setFieldDelimiter('|'); // optional 
-    foreach ($file as $row) {
-        // do_something_with($row['name'], $row['age']);
+    $delimiter = ',';
+    $rows = new CsvIterator($pathToFile, $delimiter);
+    $rows->useFirstRowAsHeader();
+    foreach ($rows as $row) {
+        // print_r($row);
     }
 ```
 
@@ -41,9 +44,8 @@ Features
 
 * Set names of columns for more readable code
 * Use first line of csv file as column names
-* Uses a ``SplFileObject`` as an iterator, which can be subclassed or overridden for custom behaviour.
 
 Todo
 ----
 
-* Working unit tests (I broke them by removing all the functionality most of them test!)
+* Unit tests

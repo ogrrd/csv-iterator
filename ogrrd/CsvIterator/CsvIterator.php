@@ -37,6 +37,14 @@ class CsvIterator extends \SplFileObject
     }
 
     /**
+     * Use the values from the first row as the keys for the remaining rows
+     */
+    public function useFirstRowAsHeader()
+    {
+        $this->setColumnNames($this->current(), true);
+    }
+
+    /**
      * @return null|array
      */
     public function current()
