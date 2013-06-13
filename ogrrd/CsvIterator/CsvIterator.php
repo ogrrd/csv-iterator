@@ -8,7 +8,6 @@ class CsvIterator extends \SplFileObject
     private $names;
     private $firstRowUsedAsNames;
 
-
     /**
      * @param string $pathToFile
      * @param string $delimiter
@@ -33,6 +32,7 @@ class CsvIterator extends \SplFileObject
             $this->firstRowUsedAsNames = true;
         }
         $this->names = $names;
+
         return $this;
     }
 
@@ -60,6 +60,7 @@ class CsvIterator extends \SplFileObject
             }
             $row = array_combine($this->names, $row);
         }
+
         return $row;
     }
 
@@ -72,6 +73,7 @@ class CsvIterator extends \SplFileObject
         if ($this->names) {
             return count($current) == count($this->names);
         }
+
         return parent::valid();
     }
 
