@@ -64,17 +64,4 @@ class CsvIterator extends \SplFileObject
         return $row;
     }
 
-    /**
-     * @return bool
-     */
-    public function valid()
-    {
-        $current = $this->current();
-        if ($this->names) {
-            return count($current) == count($this->names);
-        }
-
-        return parent::valid();
-    }
-
 }
