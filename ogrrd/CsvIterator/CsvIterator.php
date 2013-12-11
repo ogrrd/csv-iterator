@@ -56,7 +56,7 @@ class CsvIterator extends \SplFileObject
                 $this->next();
             }
             if (count($row) != count($this->names)) {
-                return false;
+                return array();
             }
             $row = array_combine($this->names, $row);
         }
