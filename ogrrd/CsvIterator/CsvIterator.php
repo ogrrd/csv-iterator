@@ -5,7 +5,14 @@ namespace ogrrd\CsvIterator;
 class CsvIterator extends \SplFileObject
 {
 
+    /**
+     * @var array
+     */
     private $names;
+
+    /**
+     * @var bool
+     */
     private $firstRowUsedAsNames;
 
     /**
