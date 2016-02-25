@@ -30,8 +30,9 @@ class CsvIterator extends \SplFileObject
 
     /**
      * @param array $names
-     * @param type $firstRowUsedAsNames
-     * @return \ogrrd\CsvIterator\CsvIterator
+     * @param bool $firstRowUsedAsNames
+     *
+     * @return CsvIterator
      */
     public function setColumnNames(array $names, $firstRowUsedAsNames = false)
     {
@@ -62,9 +63,20 @@ class CsvIterator extends \SplFileObject
             if ($this->firstRowUsedAsNames && $this->key() < 1) {
                 $this->next();
             }
-            if (count($row) != count($this->names)) {
-                return [];
+
+            $rowLength = count($row);
+            $namesLength = count($this->names);
+            if ($rowLength != $namesLength) {
+                if ($namesLength > $rowLength) {
+                    // if there's more column names than data, pad out the data with nulls to match column width
+                    $row = array_pad($row, count($this->names), null);
+                } else {
+                    // if there's more data than columns, we have unmatchable data so let's skip it
+                    return [];
+                }
             }
+
+            // combine the data with the keys
             $row = array_combine($this->names, $row);
         }
 
