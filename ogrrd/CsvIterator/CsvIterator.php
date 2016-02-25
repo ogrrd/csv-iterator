@@ -30,8 +30,9 @@ class CsvIterator extends \SplFileObject
 
     /**
      * @param array $names
-     * @param type $firstRowUsedAsNames
-     * @return \ogrrd\CsvIterator\CsvIterator
+     * @param bool $firstRowUsedAsNames
+     *
+     * @return CsvIterator
      */
     public function setColumnNames(array $names, $firstRowUsedAsNames = false)
     {
