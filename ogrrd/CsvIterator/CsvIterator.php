@@ -29,6 +29,14 @@ class CsvIterator extends \SplFileObject
     }
 
     /**
+     * @return array
+     */
+    public function getColumnNames()
+    {
+        return $this->names;
+    }
+
+    /**
      * @param array $names
      * @param bool $firstRowUsedAsNames
      *
@@ -39,6 +47,12 @@ class CsvIterator extends \SplFileObject
         if ($firstRowUsedAsNames) {
             $this->firstRowUsedAsNames = true;
         }
+
+        array_walk($names, function (&$value, $key) {
+            if ($value === '') {
+                $value = "ROW_$key";
+            }
+        });
         $this->names = $names;
 
         return $this;
@@ -49,6 +63,7 @@ class CsvIterator extends \SplFileObject
      */
     public function useFirstRowAsHeader()
     {
+        $this->next();
         $this->setColumnNames($this->current(), true);
     }
 
@@ -58,10 +73,12 @@ class CsvIterator extends \SplFileObject
     public function current()
     {
         $row = parent::current();
+
         if ($this->names) {
             // skip first row if names are set by first row of file
             if ($this->firstRowUsedAsNames && $this->key() < 1) {
                 $this->next();
+                $row = parent::current();
             }
 
             $rowLength = count($row);
