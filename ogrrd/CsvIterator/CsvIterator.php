@@ -50,7 +50,7 @@ class CsvIterator extends \SplFileObject
 
         array_walk($names, function (&$value, $key) {
             if ($value === '') {
-                $value = "ROW_$key";
+                $value = "COL_$key";
             }
         });
         $this->names = $names;
