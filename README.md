@@ -10,18 +10,14 @@ Installation
 Add this to your composer.json:
 ```json
 {
-    "repositories": [
-        {
-            "type": "vcs",
-            "url" : "https://github.com/ogrrd/csv-iterator.git"
-        }
-    ],
-
     "require": {
         "ogrrd/csv-iterator": "dev-master"
     }
 }
 ```
+
+Or just type:
+```composer require ogrrd/csv-iterator```
 
 Usage
 -----
