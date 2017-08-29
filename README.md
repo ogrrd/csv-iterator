@@ -1,11 +1,9 @@
-csv-iterator
-============
+# csv-iterator
 
 CSV Reader to array/object iterator with low memory usage and ease of use.
 Mostly useful for importing large CSV files from external APIs.
 
-Installation
-------------
+## Installation
 
 Add this to your composer.json:
 ```json
@@ -19,8 +17,7 @@ Add this to your composer.json:
 Or just type:
 ```composer require ogrrd/csv-iterator```
 
-Usage
------
+## Usage
 
 Reading data out of a CSV file:
 ```php
@@ -35,13 +32,15 @@ foreach ($rows as $row) {
 }
 ```
 
-Features
---------
+## Features
 
 * Set array of values to be used as keys for the rows (must cover all columns)
 * Use the values from the first row as the keys for the remaining rows
 
-Todo
-----
+## Todo
 
 * Unit tests
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
