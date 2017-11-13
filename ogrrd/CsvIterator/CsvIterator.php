@@ -68,14 +68,14 @@ class CsvIterator extends \SplFileObject
     }
 
     /**
-     * @return boolean|array
+     * @return array
      */
     public function current()
     {
         $row = parent::current();
 
-            return $row;
         if (!$row) {
+            return [];
         }
 
         // skip first row if names are set by first row of file
@@ -93,7 +93,7 @@ class CsvIterator extends \SplFileObject
                 $row = array_pad($row, count($this->names), null);
             } else {
                 // if there's more data than columns, we have unmatchable data so let's skip it
-                return false;
+                return [];
             }
         }
 
