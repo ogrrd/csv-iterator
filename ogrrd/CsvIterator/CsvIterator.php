@@ -64,7 +64,7 @@ class CsvIterator extends \SplFileObject
     public function useFirstRowAsHeader()
     {
         $this->next();
-        $this->setColumnNames($this->current(), true);
+        $this->setColumnNames(parent::current(), true);
     }
 
     /**
@@ -74,8 +74,8 @@ class CsvIterator extends \SplFileObject
     {
         $row = parent::current();
 
-        if (!$this->names || !$row) {
             return $row;
+        if (!$row) {
         }
 
         // skip first row if names are set by first row of file
