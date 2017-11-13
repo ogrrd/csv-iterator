@@ -8,12 +8,12 @@ class CsvIterator extends \SplFileObject
     /**
      * @var array
      */
-    private $names;
+    private $columnNames;
 
     /**
      * @var bool
      */
-    private $firstRowUsedAsNames;
+    private $firstRowUsedAsColumnNames;
 
     /**
      * @param string $pathToFile
@@ -33,7 +33,7 @@ class CsvIterator extends \SplFileObject
      */
     public function getColumnNames()
     {
-        return $this->names;
+        return $this->columnNames;
     }
 
     /**
@@ -45,7 +45,7 @@ class CsvIterator extends \SplFileObject
     public function setColumnNames(array $names, $firstRowUsedAsNames = false)
     {
         if ($firstRowUsedAsNames) {
-            $this->firstRowUsedAsNames = true;
+            $this->firstRowUsedAsColumnNames = true;
         }
 
         array_walk($names, function (&$value, $key) {
@@ -53,7 +53,7 @@ class CsvIterator extends \SplFileObject
                 $value = "COL_$key";
             }
         });
-        $this->names = $names;
+        $this->columnNames = $names;
 
         return $this;
     }
@@ -79,18 +79,18 @@ class CsvIterator extends \SplFileObject
         }
 
         // skip first row if names are set by first row of file
-        if ($this->firstRowUsedAsNames && $this->key() < 1) {
+        if ($this->firstRowUsedAsColumnNames && $this->key() < 1) {
             $this->next();
             $row = parent::current();
         }
 
         $rowLength = count($row);
-        $namesLength = count($this->names);
+        $namesLength = count($this->columnNames);
         if ($rowLength != $namesLength) {
             if (count(array_filter($row)) && $namesLength > $rowLength) {
                 // if there's more column names than data, pad out the data with nulls to match column width
                 // ensures there's some data in the row, too
-                $row = array_pad($row, count($this->names), null);
+                $row = array_pad($row, count($this->columnNames), null);
             } else {
                 // if there's more data than columns, we have unmatchable data so let's skip it
                 return [];
@@ -98,7 +98,7 @@ class CsvIterator extends \SplFileObject
         }
 
         // combine the data with the keys
-        $row = array_combine($this->names, $row);
+        $row = array_combine($this->columnNames, $row);
 
         return $row;
     }
