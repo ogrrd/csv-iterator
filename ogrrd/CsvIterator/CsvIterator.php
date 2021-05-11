@@ -8,7 +8,7 @@ class CsvIterator extends \SplFileObject
     /**
      * @var array
      */
-    private $columnNames;
+    private $columnNames = [];
 
     /**
      * @var bool
@@ -91,9 +91,12 @@ class CsvIterator extends \SplFileObject
                 // if there's more column names than data, pad out the data with nulls to match column width
                 // ensures there's some data in the row, too
                 $row = array_pad($row, count($this->columnNames), null);
-            } else {
+            } elseif ($this->firstRowUsedAsColumnNames) {
                 // if there's more data than columns, we have unmatchable data so let's skip it
                 return [];
+            } else {
+                // we don't care about matching column widths as there's no headers, so let's return the row
+                return $row;
             }
         }
 
