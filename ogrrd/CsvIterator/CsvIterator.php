@@ -4,7 +4,6 @@ namespace ogrrd\CsvIterator;
 
 class CsvIterator extends \SplFileObject
 {
-
     /**
      * @var array
      */
@@ -38,16 +37,11 @@ class CsvIterator extends \SplFileObject
 
     /**
      * @param array $names
-     * @param bool $firstRowUsedAsNames
      *
      * @return CsvIterator
      */
-    public function setColumnNames(array $names, $firstRowUsedAsNames = false)
+    public function setColumnNames(array $names)
     {
-        if ($firstRowUsedAsNames) {
-            $this->firstRowUsedAsColumnNames = true;
-        }
-
         array_walk($names, function (&$value, $key) {
             if ($value === '') {
                 $value = "COL_$key";
@@ -60,11 +54,17 @@ class CsvIterator extends \SplFileObject
 
     /**
      * Use the values from the first row as the keys for the remaining rows
+     *
+     * @return CsvIterator
      */
     public function useFirstRowAsHeader()
     {
+        $this->firstRowUsedAsColumnNames = true;
+
         $this->next();
-        $this->setColumnNames(parent::current(), true);
+        $this->setColumnNames(parent::current());
+
+        return $this;
     }
 
     /**
@@ -91,11 +91,11 @@ class CsvIterator extends \SplFileObject
                 // if there's more column names than data, pad out the data with nulls to match column width
                 // ensures there's some data in the row, too
                 $row = array_pad($row, count($this->columnNames), null);
-            } elseif ($this->firstRowUsedAsColumnNames) {
+            } elseif ($namesLength > 0) {
                 // if there's more data than columns, we have unmatchable data so let's skip it
                 return [];
             } else {
-                // we don't care about matching column widths as there's no headers, so let's return the row
+                // we don't care about matching column widths as there's no column names, so let's return the row indexed numerically
                 return $row;
             }
         }
@@ -105,5 +105,4 @@ class CsvIterator extends \SplFileObject
 
         return $row;
     }
-
 }
